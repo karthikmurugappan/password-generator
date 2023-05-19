@@ -47,27 +47,25 @@ function promptPasswordLength() {
   } while (newPass.length < passwordLength);
 
   return newPass.join("");
-
 }
 
-
 function promptPasswordTypes() {
-  var addPasswordType = (type, choices) => {
-    if (confirm(`Do you want ${type} in your password?`)) {
-      newPass.push(indexRandom(choices));
-      passwordChoice.push(...choices);
-    }
-  };
+  var typeNames = ["uppercase letters", "lowercase letters", "special characters", "numbers"];
+  var typeChoices = [uppercase, lowercase, spChar, numbers];
 
-  addPasswordType("uppercase letters", uppercase);
-  addPasswordType("lowercase letters", lowercase);
-  addPasswordType("special characters", spChar);
-  addPasswordType("numbers", numbers);
+  for (var i = 0; i < typeNames.length; i++) {
+    if (confirm(`Do you want ${typeNames[i]} in your password?`)) {
+      newPass.push(indexRandom(typeChoices[i]));
+      passwordChoice.push(...typeChoices[i]);
+    }
+  }
 
   if (newPass.length < 1) {
     alert("You need to select a data type for your password");
     promptPasswordTypes();
   }
+
+  return;
 }
 
 
